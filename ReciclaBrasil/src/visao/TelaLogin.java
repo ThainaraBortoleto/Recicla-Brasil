@@ -118,7 +118,7 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_campoSenhaActionPerformed
 
     private void botaoAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAcessarActionPerformed
-       Home tela = new Home();
+       TelaHome tela = new TelaHome();
        tela.setVisible(true);
        dispose(); //fecha a tela anterior//
     }//GEN-LAST:event_botaoAcessarActionPerformed
