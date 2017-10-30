@@ -14,8 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Home extends JFrame{
-	private JPanel painelNorte, painelNorteOeste, painelOeste, painelOesteNorte, painelCentro, painelCentroNorte;
+	private JPanel painelNorte, painelNorteOeste, painelOeste, painelOesteNorte, painelOesteCentro, painelOesteSul, painelCentro, painelCentroNorte;
 	private JLabel lblLogo, lblNomeUsuario, lblIconePerfil, lblInicio, lblPainelDeControle;
+	private JButton buscarButton, cadastrarColetorButton, consultarColetorButton, cadastrarEmpresaButton, consultarEmpresaButton, alterarPrecosButton;
 	private ImageIcon perfilIcon, buscarIcon;
 	private Font fontTitulo, fontSubTitulo;
 	
@@ -56,15 +57,33 @@ public class Home extends JFrame{
 		redimencionar(perfilIcon);
 		lblIconePerfil.setIcon(perfilIcon);
 		JTextField pesquisar = new JTextField("Pesquisar...");
-		JButton buscarButton = new JButton("Buscar");
-		
-		
+		buscarButton = new JButton("Buscar");
 		painelOesteNorte.add(lblIconePerfil);
 		painelOesteNorte.add(lblNomeUsuario);
 		painelOesteNorte.add(pesquisar);
 		painelOesteNorte.add(buscarButton);
 		
+		//Coletor e Empresa
+		painelOesteCentro = new JPanel(new GridLayout(6,1));
+		painelOesteCentro.setBackground(new Color(38, 38, 38));
+		cadastrarColetorButton = new JButton("Cadastrar Coletor");
+		consultarColetorButton = new JButton("Consultar Coletor");
+		cadastrarEmpresaButton = new JButton("Cadastrar Empresa");
+		consultarEmpresaButton = new JButton("Consultar Empresa");
+		painelOesteCentro.add(cadastrarColetorButton);
+		painelOesteCentro.add(consultarColetorButton);
+		painelOesteCentro.add(cadastrarEmpresaButton);
+		painelOesteCentro.add(consultarEmpresaButton);
+		
+		//alterar preços
+		painelOesteSul = new JPanel(new GridLayout(1,1));
+		painelOesteSul.setBackground(new Color(38, 38, 38));
+		alterarPrecosButton = new JButton("Ajustar Valores do dia");
+		painelOesteSul.add(alterarPrecosButton);
+		
 		painelOeste.add(painelOesteNorte, BorderLayout.NORTH);
+		painelOeste.add(painelOesteCentro, BorderLayout.CENTER);
+		painelOeste.add(painelOesteSul, BorderLayout.SOUTH);
 		
 		//Painel Centro
 		painelCentro = new JPanel(new BorderLayout());
