@@ -3,14 +3,16 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Home extends JFrame{
-	private JLabel lblLogo, lblTeste2;
+	private JLabel lblLogo, lblNomeUsuario, lblIcone;
+	private ImageIcon icone;
 	
 	public Home() {
 		super("Home");
@@ -20,14 +22,14 @@ public class Home extends JFrame{
 		caixa.setLayout(new BorderLayout());
 		
 		lblLogo = new JLabel("ReciclaBrasil");
-		lblTeste2 = new JLabel("ReciclaBrasil");
+		lblNomeUsuario = new JLabel("Nome usuário");
 		lblLogo.setForeground(new Color(255, 255, 255));
-		lblTeste2.setForeground(Color.white);
+		lblNomeUsuario.setForeground(Color.white);
 		
 		Font fontTitulo = new Font("Roboto", Font.BOLD, 20);
 		Font fontSubTitulo = new Font("Roboto", Font.ITALIC, 14);
 		lblLogo.setFont(fontTitulo);
-		lblTeste2.setFont(fontTitulo);
+		lblNomeUsuario.setFont(fontSubTitulo);
 		
 		JPanel painelNorte = new JPanel(new BorderLayout());
 		JPanel painelNorteOeste = new JPanel(new FlowLayout());
@@ -36,9 +38,17 @@ public class Home extends JFrame{
 		painelNorteOeste.add(lblLogo);
 		painelNorte.add(painelNorteOeste, BorderLayout.WEST);
 		
-		JPanel painelOeste = new JPanel();
+		JPanel painelOeste = new JPanel(new BorderLayout());
+		JPanel painelOesteNorte = new JPanel(new FlowLayout());
 		painelOeste.setBackground(new Color(38, 38, 38));
-		painelOeste.add(lblTeste2);
+		painelOesteNorte.setBackground(new Color(38, 38, 38));
+		icone = criarImageIcon("../img/female-icon.png", "Icone Perfil");
+		redimencionar(icone);
+		lblIcone.setIcon(icone);
+		painelOesteNorte.add(lblIcone);
+		painelOesteNorte.add(lblNomeUsuario);
+		
+		painelOeste.add(painelOesteNorte, BorderLayout.NORTH);
 		
 		JPanel painelCentro = new JPanel(new BorderLayout());
 		JPanel painelCentroNorte = new JPanel(new BorderLayout());
@@ -63,5 +73,23 @@ public class Home extends JFrame{
 		setVisible(true);
 		
 		
+	}
+
+	public ImageIcon criarImageIcon(String caminho, String descricao) {
+		java.net.URL imgURL = getClass().getResource(caminho);
+		if (imgURL != null) {
+			return new ImageIcon(imgURL, descricao);
+		} else {
+			System.err.println("Não foi possível carregar o arquivo de imagem: " + caminho);
+			return null;
+		}
+	}
+	
+	public void redimencionar(ImageIcon icone) {
+		lblIcone = new JLabel();
+		lblIcone.setBounds(10, 11, 50, 50);
+		Image img = icone.getImage();
+		Image newImg = img.getScaledInstance(lblIcone.getWidth(), lblIcone.getHeight(), Image.SCALE_SMOOTH);
+		this.icone = new ImageIcon(newImg);
 	}
 }
