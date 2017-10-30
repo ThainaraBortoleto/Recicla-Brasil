@@ -3,16 +3,21 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class Home extends JFrame{
-	private JLabel lblLogo, lblNomeUsuario, lblIcone;
-	private ImageIcon icone;
+	private JPanel painelNorte, painelNorteOeste, painelOeste, painelOesteNorte, painelCentro, painelCentroNorte;
+	private JLabel lblLogo, lblNomeUsuario, lblIconePerfil, lblInicio, lblPainelDeControle;
+	private ImageIcon perfilIcon, buscarIcon;
+	private Font fontTitulo, fontSubTitulo;
 	
 	public Home() {
 		super("Home");
@@ -26,35 +31,47 @@ public class Home extends JFrame{
 		lblLogo.setForeground(new Color(255, 255, 255));
 		lblNomeUsuario.setForeground(Color.white);
 		
-		Font fontTitulo = new Font("Roboto", Font.BOLD, 20);
-		Font fontSubTitulo = new Font("Roboto", Font.ITALIC, 14);
+		//Fontes
+		fontTitulo = new Font("Roboto", Font.BOLD, 20);
+		fontSubTitulo = new Font("Roboto", Font.ITALIC, 14);
 		lblLogo.setFont(fontTitulo);
 		lblNomeUsuario.setFont(fontSubTitulo);
 		
-		JPanel painelNorte = new JPanel(new BorderLayout());
-		JPanel painelNorteOeste = new JPanel(new FlowLayout());
+		//Painel Norte
+		painelNorte = new JPanel(new BorderLayout());
+		painelNorteOeste = new JPanel(new FlowLayout());
 		painelNorte.setBackground(new Color(0, 153, 204));
 		painelNorteOeste.setBackground(new Color(0, 143, 204));
 		painelNorteOeste.add(lblLogo);
 		painelNorte.add(painelNorteOeste, BorderLayout.WEST);
 		
-		JPanel painelOeste = new JPanel(new BorderLayout());
-		JPanel painelOesteNorte = new JPanel(new FlowLayout());
+		//Painel Oeste
+		painelOeste = new JPanel(new BorderLayout());
+		
+		//Icone, nome de perfil
+		painelOesteNorte = new JPanel(new GridLayout(2,2));
 		painelOeste.setBackground(new Color(38, 38, 38));
 		painelOesteNorte.setBackground(new Color(38, 38, 38));
-		icone = criarImageIcon("../img/female-icon.png", "Icone Perfil");
-		redimencionar(icone);
-		lblIcone.setIcon(icone);
-		painelOesteNorte.add(lblIcone);
+		perfilIcon = criarImageIcon("../img/female-icon.png", "Icone Perfil");
+		redimencionar(perfilIcon);
+		lblIconePerfil.setIcon(perfilIcon);
+		JTextField pesquisar = new JTextField("Pesquisar...");
+		JButton buscarButton = new JButton("Buscar");
+		
+		
+		painelOesteNorte.add(lblIconePerfil);
 		painelOesteNorte.add(lblNomeUsuario);
+		painelOesteNorte.add(pesquisar);
+		painelOesteNorte.add(buscarButton);
 		
 		painelOeste.add(painelOesteNorte, BorderLayout.NORTH);
 		
-		JPanel painelCentro = new JPanel(new BorderLayout());
-		JPanel painelCentroNorte = new JPanel(new BorderLayout());
-		JLabel lblInicio = new JLabel("Início");
+		//Painel Centro
+		painelCentro = new JPanel(new BorderLayout());
+		painelCentroNorte = new JPanel(new BorderLayout());
+		lblInicio = new JLabel("Início");
 		lblInicio.setFont(fontTitulo);
-		JLabel lblPainelDeControle = new JLabel("Painel de Controle");
+		lblPainelDeControle = new JLabel("Painel de Controle");
 		lblPainelDeControle.setFont(fontSubTitulo);
 		lblPainelDeControle.setForeground(Color.GRAY);
 		painelCentroNorte.add(lblInicio, BorderLayout.WEST);
@@ -62,7 +79,7 @@ public class Home extends JFrame{
 		
 		painelCentro.add(painelCentroNorte, BorderLayout.NORTH);
 		
-		
+		//Painel Geral
 		caixa.add(painelNorte, BorderLayout.NORTH);
 		caixa.add(painelOeste, BorderLayout.WEST);
 		caixa.add(painelCentro, BorderLayout.CENTER);
@@ -86,10 +103,10 @@ public class Home extends JFrame{
 	}
 	
 	public void redimencionar(ImageIcon icone) {
-		lblIcone = new JLabel();
-		lblIcone.setBounds(10, 11, 50, 50);
+		lblIconePerfil = new JLabel();
+		lblIconePerfil.setBounds(10, 11, 50, 50);
 		Image img = icone.getImage();
-		Image newImg = img.getScaledInstance(lblIcone.getWidth(), lblIcone.getHeight(), Image.SCALE_SMOOTH);
-		this.icone = new ImageIcon(newImg);
+		Image newImg = img.getScaledInstance(lblIconePerfil.getWidth(), lblIconePerfil.getHeight(), Image.SCALE_SMOOTH);
+		this.perfilIcon = new ImageIcon(newImg);
 	}
 }
