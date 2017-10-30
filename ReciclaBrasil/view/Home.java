@@ -29,9 +29,12 @@ public class Home extends JFrame{
 		lblLogo.setFont(fontTitulo);
 		lblTeste2.setFont(fontTitulo);
 		
-		JPanel painelNorte = new JPanel(new FlowLayout());
+		JPanel painelNorte = new JPanel(new BorderLayout());
+		JPanel painelNorteOeste = new JPanel(new FlowLayout());
 		painelNorte.setBackground(new Color(0, 153, 204));
-		painelNorte.add(lblLogo);
+		painelNorteOeste.setBackground(new Color(0, 143, 204));
+		painelNorteOeste.add(lblLogo);
+		painelNorte.add(painelNorteOeste, BorderLayout.WEST);
 		
 		JPanel painelOeste = new JPanel();
 		painelOeste.setBackground(new Color(38, 38, 38));
