@@ -203,6 +203,7 @@ public class AjusteValor extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == pagInicial) {
 				new Home();
+				dispose();
 			}else if (e.getSource() == cadastrarColetor) {
 				System.out.println("Cadastrar coletor");
 			} else if (e.getSource() == consultarColetor) {
@@ -213,6 +214,7 @@ public class AjusteValor extends JFrame{
 				System.out.println("Consultar Empresa");
 			} else if (e.getSource() == ajusteValor) {
 				new AjusteValor();
+				dispose();
 			} else if(e.getSource() == btnEditarAluminio) {
 				lblPrecoAluminio.setText(JOptionPane.showInputDialog("Novo valor Alumínio: "));
 			} else if(e.getSource() == btnEditarPapelao) {
