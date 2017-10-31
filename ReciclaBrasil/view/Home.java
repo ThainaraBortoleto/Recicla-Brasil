@@ -1,131 +1,220 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JProgressBar;
+import javax.swing.border.EmptyBorder;
 
 public class Home extends JFrame{
-	private JPanel painelNorte, painelNorteOeste, painelOeste, painelOesteNorte, painelOesteCentro, painelOesteSul, painelCentro, painelCentroNorte;
-	private JLabel lblLogo, lblNomeUsuario, lblIconePerfil, lblInicio, lblPainelDeControle;
-	private JButton buscarButton, cadastrarColetorButton, consultarColetorButton, cadastrarEmpresaButton, consultarEmpresaButton, alterarPrecosButton;
-	private ImageIcon perfilIcon, buscarIcon;
-	private Font fontTitulo, fontSubTitulo;
+	private JPanel contentPane;
+	JMenuBar menuBar;
+	JMenu menuColetor, menuEmpresa, menuAjustarValores, menuSair;
+	JMenuItem cadastrarColetor, consultarColetor, cadastrarEmpresa, consultarEmpresa;
+	JPanel panelBody, panelRodape;
+	JLabel lblAluminio, lblPapelao, lblPlastico, lblVidro, lblTotalDeMaterial, lblIncio, lblPainelDeControle, lblAgenda, porcentagemAluminio, porcentagemPapelao, porcentagemPlastico, 
+		porcentagemVidro, lblNoveHoras, lblDezHoras, lblOnzeHoras, lblDozeHoras, lblTrezeHoras, lblQuatorzeHoras, lblQuinzeHoras, lblDezesseisHoras, lblDezeseteHoras, lblDezoitoHoras, lblEmpresaX, 
+			lblEmpresaY, lblEmpresaXy, lblEmpresaK, lblCopyRight, lblDesenvolvedores;
 	
 	public Home() {
-		super("Home");
+		super("ReciclaBrasil");
 		
-		Container caixa = getContentPane();
-		caixa.setBackground(new Color(247, 249, 255));
-		caixa.setLayout(new BorderLayout());
+		menuBar = new JMenuBar();
+		menuBar.setBackground(Color.LIGHT_GRAY);
+		setJMenuBar(menuBar);
 		
-		lblLogo = new JLabel("ReciclaBrasil");
-		lblNomeUsuario = new JLabel("Nome usuário");
-		lblLogo.setForeground(new Color(255, 255, 255));
-		lblNomeUsuario.setForeground(Color.white);
+		menuColetor = new JMenu("Coletor");
+		menuBar.add(menuColetor);
 		
-		//Fontes
-		fontTitulo = new Font("Roboto", Font.BOLD, 20);
-		fontSubTitulo = new Font("Roboto", Font.ITALIC, 14);
-		lblLogo.setFont(fontTitulo);
-		lblNomeUsuario.setFont(fontSubTitulo);
+		cadastrarColetor = new JMenuItem("Cadastrar");
+		menuColetor.add(cadastrarColetor);
 		
-		//Painel Norte
-		painelNorte = new JPanel(new BorderLayout());
-		painelNorteOeste = new JPanel(new FlowLayout());
-		painelNorte.setBackground(new Color(0, 153, 204));
-		painelNorteOeste.setBackground(new Color(0, 143, 204));
-		painelNorteOeste.add(lblLogo);
-		painelNorte.add(painelNorteOeste, BorderLayout.WEST);
+		consultarColetor = new JMenuItem("Consultar");
+		menuColetor.add(consultarColetor);
 		
-		//Painel Oeste
-		painelOeste = new JPanel(new BorderLayout());
+		 menuEmpresa = new JMenu("Empresa");
+		menuBar.add(menuEmpresa);
 		
-		//Icone, nome de perfil
-		painelOesteNorte = new JPanel(new GridLayout(2,2));
-		painelOeste.setBackground(new Color(38, 38, 38));
-		painelOesteNorte.setBackground(new Color(38, 38, 38));
-		perfilIcon = criarImageIcon("../img/female-icon.png", "Icone Perfil");
-		redimencionar(perfilIcon);
-		lblIconePerfil.setIcon(perfilIcon);
-		JTextField pesquisar = new JTextField("Pesquisar...");
-		buscarButton = new JButton("Buscar");
-		painelOesteNorte.add(lblIconePerfil);
-		painelOesteNorte.add(lblNomeUsuario);
-		painelOesteNorte.add(pesquisar);
-		painelOesteNorte.add(buscarButton);
+		cadastrarEmpresa = new JMenuItem("Cadastrar");
+		menuEmpresa.add(cadastrarEmpresa);
 		
-		//Coletor e Empresa
-		painelOesteCentro = new JPanel(new GridLayout(6,1));
-		painelOesteCentro.setBackground(new Color(38, 38, 38));
-		cadastrarColetorButton = new JButton("Cadastrar Coletor");
-		consultarColetorButton = new JButton("Consultar Coletor");
-		cadastrarEmpresaButton = new JButton("Cadastrar Empresa");
-		consultarEmpresaButton = new JButton("Consultar Empresa");
-		painelOesteCentro.add(cadastrarColetorButton);
-		painelOesteCentro.add(consultarColetorButton);
-		painelOesteCentro.add(cadastrarEmpresaButton);
-		painelOesteCentro.add(consultarEmpresaButton);
+		consultarEmpresa = new JMenuItem("Consultar");
+		menuEmpresa.add(consultarEmpresa);
 		
-		//alterar preços
-		painelOesteSul = new JPanel(new GridLayout(1,1));
-		painelOesteSul.setBackground(new Color(38, 38, 38));
-		alterarPrecosButton = new JButton("Ajustar Valores do dia");
-		painelOesteSul.add(alterarPrecosButton);
+		menuAjustarValores = new JMenu("Ajustar Valores");
+		menuBar.add(menuAjustarValores);
 		
-		painelOeste.add(painelOesteNorte, BorderLayout.NORTH);
-		painelOeste.add(painelOesteCentro, BorderLayout.CENTER);
-		painelOeste.add(painelOesteSul, BorderLayout.SOUTH);
+		menuSair = new JMenu("Sair");
+		menuBar.add(menuSair);
 		
-		//Painel Centro
-		painelCentro = new JPanel(new BorderLayout());
-		painelCentroNorte = new JPanel(new BorderLayout());
-		lblInicio = new JLabel("Início");
-		lblInicio.setFont(fontTitulo);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		panelBody = new JPanel();
+		panelBody.setBackground(Color.WHITE);
+		contentPane.add(panelBody, BorderLayout.CENTER);
+		panelBody.setLayout(null);
+		
+		//Titulo
+		lblIncio = new JLabel("Início");
+		lblIncio.setForeground(Color.DARK_GRAY);
+		lblIncio.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+		lblIncio.setBounds(16, 6, 61, 25);
+		panelBody.add(lblIncio);
+		
 		lblPainelDeControle = new JLabel("Painel de Controle");
-		lblPainelDeControle.setFont(fontSubTitulo);
-		lblPainelDeControle.setForeground(Color.GRAY);
-		painelCentroNorte.add(lblInicio, BorderLayout.WEST);
-		painelCentroNorte.add(lblPainelDeControle, BorderLayout.CENTER);
+		lblPainelDeControle.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
+		lblPainelDeControle.setForeground(Color.LIGHT_GRAY);
+		lblPainelDeControle.setBounds(75, 12, 111, 16);
+		panelBody.add(lblPainelDeControle);
 		
-		painelCentro.add(painelCentroNorte, BorderLayout.NORTH);
+		//ProgressBar
+		lblTotalDeMaterial = new JLabel("Total de Material");
+		lblTotalDeMaterial.setFont(new Font("Lucida Grande", Font.BOLD, 20));
+		lblTotalDeMaterial.setBounds(457, 82, 186, 25);
+		panelBody.add(lblTotalDeMaterial);
 		
-		//Painel Geral
-		caixa.add(painelNorte, BorderLayout.NORTH);
-		caixa.add(painelOeste, BorderLayout.WEST);
-		caixa.add(painelCentro, BorderLayout.CENTER);
+		JProgressBar progressBarAluminio = new JProgressBar();
+		progressBarAluminio.setValue(55);
+		progressBarAluminio.setBounds(284, 133, 579, 20);
+		panelBody.add(progressBarAluminio);
 		
+		lblAluminio = new JLabel("Alumínio");
+		lblAluminio.setBounds(154, 133, 61, 16);
+		panelBody.add(lblAluminio);
 		
+		lblPapelao = new JLabel("Papelão");
+		lblPapelao.setBounds(154, 161, 61, 16);
+		panelBody.add(lblPapelao);
+		
+		lblPlastico = new JLabel("Plástico");
+		lblPlastico.setBounds(154, 189, 61, 16);
+		panelBody.add(lblPlastico);
+		
+		lblVidro = new JLabel("Vidro");
+		lblVidro.setBounds(154, 217, 61, 16);
+		panelBody.add(lblVidro);
+		
+		JProgressBar progressBarPapelao = new JProgressBar();
+		progressBarPapelao.setValue(70);
+		progressBarPapelao.setBounds(284, 157, 579, 20);
+		panelBody.add(progressBarPapelao);
+		
+		JProgressBar progressBarPlastico = new JProgressBar();
+		progressBarPlastico.setValue(30);
+		progressBarPlastico.setBounds(284, 185, 579, 20);
+		panelBody.add(progressBarPlastico);
+		
+		JProgressBar progressBarVidro = new JProgressBar();
+		progressBarVidro.setValue(90);
+		progressBarVidro.setBounds(284, 213, 579, 20);
+		panelBody.add(progressBarVidro);
+		
+		porcentagemAluminio = new JLabel("55%");
+		porcentagemAluminio.setBounds(916, 133, 61, 16);
+		panelBody.add(porcentagemAluminio);
+		
+		porcentagemPapelao = new JLabel("70%");
+		porcentagemPapelao.setBounds(916, 161, 61, 16);
+		panelBody.add(porcentagemPapelao);
+		
+		porcentagemPlastico = new JLabel("30%");
+		porcentagemPlastico.setBounds(916, 189, 61, 16);
+		panelBody.add(porcentagemPlastico);
+		
+		porcentagemVidro = new JLabel("90%");
+		porcentagemVidro.setBounds(916, 217, 61, 16);
+		panelBody.add(porcentagemVidro);
+		
+		//Agenda
+		lblAgenda = new JLabel("Agenda");
+		lblAgenda.setFont(new Font("Lucida Grande", Font.BOLD, 20));
+		lblAgenda.setBounds(511, 322, 89, 34);
+		panelBody.add(lblAgenda);
+		
+		lblNoveHoras = new JLabel("09:00");
+		lblNoveHoras.setBounds(154, 369, 61, 16);
+		panelBody.add(lblNoveHoras);
+		
+		lblDezHoras = new JLabel("10:00");
+		lblDezHoras.setBounds(154, 400, 61, 16);
+		panelBody.add(lblDezHoras);
+		
+		lblOnzeHoras = new JLabel("11:00");
+		lblOnzeHoras.setBounds(154, 428, 61, 16);
+		panelBody.add(lblOnzeHoras);
+		
+		lblDozeHoras = new JLabel("12:00");
+		lblDozeHoras.setBounds(154, 456, 61, 16);
+		panelBody.add(lblDozeHoras);
+		
+		lblTrezeHoras = new JLabel("13:00");
+		lblTrezeHoras.setBounds(154, 486, 61, 16);
+		panelBody.add(lblTrezeHoras);
+		
+		lblQuatorzeHoras = new JLabel("14:00");
+		lblQuatorzeHoras.setBounds(154, 514, 61, 16);
+		panelBody.add(lblQuatorzeHoras);
+		
+		lblQuinzeHoras = new JLabel("15:00");
+		lblQuinzeHoras.setBounds(154, 542, 61, 16);
+		panelBody.add(lblQuinzeHoras);
+		
+		lblDezesseisHoras = new JLabel("16:00");
+		lblDezesseisHoras.setBounds(154, 570, 61, 16);
+		panelBody.add(lblDezesseisHoras);
+		
+		lblDezeseteHoras = new JLabel("17:00");
+		lblDezeseteHoras.setBounds(154, 598, 61, 16);
+		panelBody.add(lblDezeseteHoras);
+		
+		lblDezoitoHoras = new JLabel("18:00");
+		lblDezoitoHoras.setBounds(154, 626, 61, 16);
+		panelBody.add(lblDezoitoHoras);
+		
+		lblEmpresaX = new JLabel("Empresa X");
+		lblEmpresaX.setBounds(284, 369, 81, 16);
+		panelBody.add(lblEmpresaX);
+		
+		lblEmpresaY = new JLabel("Empresa Y");
+		lblEmpresaY.setBounds(284, 400, 70, 16);
+		panelBody.add(lblEmpresaY);
+		
+		lblEmpresaXy = new JLabel("Empresa XY");
+		lblEmpresaXy.setBounds(284, 456, 81, 16);
+		panelBody.add(lblEmpresaXy);
+		
+		lblEmpresaK = new JLabel("Empresa K");
+		lblEmpresaK.setBounds(284, 598, 81, 16);
+		panelBody.add(lblEmpresaK);
+		
+		//Rodapé
+		panelRodape = new JPanel();
+		panelRodape.setBackground(Color.LIGHT_GRAY);
+		contentPane.add(panelRodape, BorderLayout.SOUTH);
+		
+		lblCopyRight = new JLabel("© Copyright 2001-2017");
+		lblCopyRight.setForeground(Color.WHITE);
+		panelRodape.add(lblCopyRight);
+		
+		lblDesenvolvedores = new JLabel("André Gianfratti, Arthur Grigoletto, Guilherme Araújo, Raul Machado, Thainara Bortoleto");
+		lblDesenvolvedores.setForeground(Color.WHITE);
+		lblDesenvolvedores.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		panelRodape.add(lblDesenvolvedores);
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1266, 529);
+		setBounds(100, 100, 1161, 808);
 		setVisible(true);
 		
 		
-	}
-
-	public ImageIcon criarImageIcon(String caminho, String descricao) {
-		java.net.URL imgURL = getClass().getResource(caminho);
-		if (imgURL != null) {
-			return new ImageIcon(imgURL, descricao);
-		} else {
-			System.err.println("Não foi possível carregar o arquivo de imagem: " + caminho);
-			return null;
-		}
-	}
-	
-	public void redimencionar(ImageIcon icone) {
-		lblIconePerfil = new JLabel();
-		lblIconePerfil.setBounds(10, 11, 50, 50);
-		Image img = icone.getImage();
-		Image newImg = img.getScaledInstance(lblIconePerfil.getWidth(), lblIconePerfil.getHeight(), Image.SCALE_SMOOTH);
-		this.perfilIcon = new ImageIcon(newImg);
 	}
 }
