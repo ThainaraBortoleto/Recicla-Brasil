@@ -1,35 +1,42 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 public class Home extends JFrame {
-	private JPanel contentPane;
+	private JPanel contentPane, panelBody, panelRodape;
 	private JMenuBar menuBar;
 	private JMenu menuHome, menuColetor, menuEmpresa, menuAjustarValores, menuSair;
-	private JMenuItem pagInicial, cadastrarColetor, consultarColetor, cadastrarEmpresa, consultarEmpresa, ajusteValor, sair;
-	private JPanel panelBody, panelRodape;
-	private JLabel lblAluminio, lblPapelao, lblPlastico, lblVidro, lblTotalDeMaterial, lblIncio, lblPainelDeControle, lblAgenda,
-			porcentagemAluminio, porcentagemPapelao, porcentagemPlastico, porcentagemVidro, lblNoveHoras, lblDezHoras,
-			lblOnzeHoras, lblDozeHoras, lblTrezeHoras, lblQuatorzeHoras, lblQuinzeHoras, lblDezesseisHoras,
+	private JMenuItem pagInicial, cadastrarColetor, consultarColetor, cadastrarEmpresa, consultarEmpresa, ajusteValor,
+			sair;
+	private JLabel lblAluminio, lblPapelao, lblPlastico, lblVidro, lblTotalDeMaterial, lblIncio, lblPainelDeControle,
+			lblAgenda, porcentagemAluminio, porcentagemPapelao, porcentagemPlastico, porcentagemVidro, lblNoveHoras,
+			lblDezHoras, lblOnzeHoras, lblDozeHoras, lblTrezeHoras, lblQuatorzeHoras, lblQuinzeHoras, lblDezesseisHoras,
 			lblDezeseteHoras, lblDezoitoHoras, lblEmpresaX, lblEmpresaY, lblEmpresaXy, lblEmpresaK, lblCopyRight,
 			lblDesenvolvedores;
+	private JTable agenda;
 	private Observador observador;
 
 	public Home() {
 		super("ReciclaBrasil");
+		
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		int xsize = (int) tk.getScreenSize().getWidth();
+		int ysize = (int) tk.getScreenSize().getHeight();
+		this.setSize(xsize, ysize);
 
 		menuBar = new JMenuBar();
 		menuBar.setBackground(Color.LIGHT_GRAY);
@@ -98,7 +105,7 @@ public class Home extends JFrame {
 		// ProgressBar
 		lblTotalDeMaterial = new JLabel("Total de Material");
 		lblTotalDeMaterial.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblTotalDeMaterial.setBounds(457, 82, 186, 25);
+		lblTotalDeMaterial.setBounds(485, 82, 186, 25);
 		panelBody.add(lblTotalDeMaterial);
 
 		JProgressBar progressBarAluminio = new JProgressBar();
@@ -156,64 +163,30 @@ public class Home extends JFrame {
 		// Agenda
 		lblAgenda = new JLabel("Agenda");
 		lblAgenda.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblAgenda.setBounds(511, 322, 89, 34);
+		lblAgenda.setBounds(515, 450, 186, 25);
 		panelBody.add(lblAgenda);
-
-		lblNoveHoras = new JLabel("09:00");
-		lblNoveHoras.setBounds(154, 369, 61, 16);
-		panelBody.add(lblNoveHoras);
-
-		lblDezHoras = new JLabel("10:00");
-		lblDezHoras.setBounds(154, 400, 61, 16);
-		panelBody.add(lblDezHoras);
-
-		lblOnzeHoras = new JLabel("11:00");
-		lblOnzeHoras.setBounds(154, 428, 61, 16);
-		panelBody.add(lblOnzeHoras);
-
-		lblDozeHoras = new JLabel("12:00");
-		lblDozeHoras.setBounds(154, 456, 61, 16);
-		panelBody.add(lblDozeHoras);
-
-		lblTrezeHoras = new JLabel("13:00");
-		lblTrezeHoras.setBounds(154, 486, 61, 16);
-		panelBody.add(lblTrezeHoras);
-
-		lblQuatorzeHoras = new JLabel("14:00");
-		lblQuatorzeHoras.setBounds(154, 514, 61, 16);
-		panelBody.add(lblQuatorzeHoras);
-
-		lblQuinzeHoras = new JLabel("15:00");
-		lblQuinzeHoras.setBounds(154, 542, 61, 16);
-		panelBody.add(lblQuinzeHoras);
-
-		lblDezesseisHoras = new JLabel("16:00");
-		lblDezesseisHoras.setBounds(154, 570, 61, 16);
-		panelBody.add(lblDezesseisHoras);
-
-		lblDezeseteHoras = new JLabel("17:00");
-		lblDezeseteHoras.setBounds(154, 598, 61, 16);
-		panelBody.add(lblDezeseteHoras);
-
-		lblDezoitoHoras = new JLabel("18:00");
-		lblDezoitoHoras.setBounds(154, 626, 61, 16);
-		panelBody.add(lblDezoitoHoras);
-
-		lblEmpresaX = new JLabel("Empresa X");
-		lblEmpresaX.setBounds(284, 369, 81, 16);
-		panelBody.add(lblEmpresaX);
-
-		lblEmpresaY = new JLabel("Empresa Y");
-		lblEmpresaY.setBounds(284, 400, 70, 16);
-		panelBody.add(lblEmpresaY);
-
-		lblEmpresaXy = new JLabel("Empresa XY");
-		lblEmpresaXy.setBounds(284, 456, 81, 16);
-		panelBody.add(lblEmpresaXy);
-
-		lblEmpresaK = new JLabel("Empresa K");
-		lblEmpresaK.setBounds(284, 598, 81, 16);
-		panelBody.add(lblEmpresaK);
+		
+		String[] nomesColunas = {"Hora", "Empresa"};
+		Object[][] data = {
+				{"09:00", null},
+				{"10:00", null},
+				{"11:00", null},
+				{"12:00", null},
+				{"13:00", null},
+				{"14:00", null},
+				{"15:00", null},
+				{"16:00", null},
+				{"17:00", null},
+				{"18:00", null}
+				
+		};
+		agenda = new JTable(data, nomesColunas);
+		JScrollPane scrollPane = new JScrollPane(agenda);
+		scrollPane.setBounds(323, 500, 463, 190);
+		panelBody.add(scrollPane);
+		
+		
+		
 
 		// Rodapé
 		panelRodape = new JPanel();
@@ -231,7 +204,6 @@ public class Home extends JFrame {
 		panelRodape.add(lblDesenvolvedores);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1161, 808);
 		setVisible(true);
 
 		// observador
@@ -243,27 +215,34 @@ public class Home extends JFrame {
 		consultarEmpresa.addActionListener(observador);
 		ajusteValor.addActionListener(observador);
 		sair.addActionListener(observador);
+		
+		
 
 	}
 
 	class Observador implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() == pagInicial) {
+			if (e.getSource() == pagInicial) {
 				new Home();
 				dispose();
 			} else if (e.getSource() == cadastrarColetor) {
-				System.out.println("Cadastrar coletor");
+				new CadastrarColetor();
+				dispose();
 			} else if (e.getSource() == consultarColetor) {
-				System.out.println("Consultar coletor");
+				new ColetorRecebimentoMaterial();
+				dispose();
 			} else if (e.getSource() == cadastrarEmpresa) {
-				System.out.println("Cadastrar Empresa");
+				new CadastrarEmpresa();
+				dispose();
 			} else if (e.getSource() == consultarEmpresa) {
-				System.out.println("Consultar Empresa");
+				new ConsultarEmpresa1();
+				dispose();
 			} else if (e.getSource() == ajusteValor) {
 				new AjusteValor();
 				dispose();
 			} else {
-				System.exit(0);
+				new TelaLogin();
+				dispose();
 			}
 		}
 	}

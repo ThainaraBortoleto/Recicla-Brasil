@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,6 +27,11 @@ public class AjusteValor extends JFrame{
 	
 	public AjusteValor() {
 		super("ReciclaBrasil");
+		
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		int xsize = (int) tk.getScreenSize().getWidth();
+		int ysize = (int) tk.getScreenSize().getHeight();
+		this.setSize(xsize, ysize);
 
 		menuBar = new JMenuBar();
 		menuBar.setBackground(Color.LIGHT_GRAY);
@@ -177,7 +183,6 @@ public class AjusteValor extends JFrame{
 		panelRodape.add(lblDesenvolvedores);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1161, 808);
 		setVisible(true);
 
 		// observador
@@ -205,13 +210,17 @@ public class AjusteValor extends JFrame{
 				new Home();
 				dispose();
 			}else if (e.getSource() == cadastrarColetor) {
-				System.out.println("Cadastrar coletor");
+				new CadastrarColetor();
+				dispose();
 			} else if (e.getSource() == consultarColetor) {
-				System.out.println("Consultar coletor");
+				new ColetorRecebimentoMaterial();
+				dispose();
 			} else if (e.getSource() == cadastrarEmpresa) {
-				System.out.println("Cadastrar Empresa");
+				new CadastrarEmpresa();
+				dispose();
 			} else if (e.getSource() == consultarEmpresa) {
-				System.out.println("Consultar Empresa");
+				new ConsultarEmpresa1();
+				dispose();
 			} else if (e.getSource() == ajusteValor) {
 				new AjusteValor();
 				dispose();
@@ -224,7 +233,8 @@ public class AjusteValor extends JFrame{
 			} else if(e.getSource() == btnEditarVidro) {
 				lblPrecoVidro.setText(JOptionPane.showInputDialog("Novo valor Alumínio: "));
 			} else {
-				System.exit(0);
+				new TelaLogin();
+				dispose();
 			}
 		}
 	}
