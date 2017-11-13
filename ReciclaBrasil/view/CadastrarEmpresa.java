@@ -37,7 +37,7 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
 	public CadastrarEmpresa() {
 		// NavBar
 		super("ReciclaBrasil");
-		
+
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		int xsize = (int) tk.getScreenSize().getWidth();
 		int ysize = (int) tk.getScreenSize().getHeight();
@@ -616,7 +616,7 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
 
 	class Observador implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() == JBsalvar) {
+			if (e.getSource() == JBsalvar) {
 				jTextField1.setText(" ");
 				jTextField2.setText("");
 				jTextField3.setText("");
@@ -636,7 +636,7 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
 				jTextField17.setText("");
 				jTextField18.setText("");
 				jTextField19.setText("");
-			}else if (e.getSource() == pagInicial) {
+			} else if (e.getSource() == pagInicial) {
 				new Home();
 				dispose();
 			} else if (e.getSource() == cadastrarColetor) {

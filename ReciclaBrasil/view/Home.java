@@ -219,7 +219,7 @@ public class Home extends JFrame {
 		
 
 	}
-
+	
 	class Observador implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == pagInicial) {

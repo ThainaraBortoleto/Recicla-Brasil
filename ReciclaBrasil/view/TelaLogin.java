@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
@@ -30,16 +31,20 @@ public class TelaLogin extends JFrame {
 
 	
 	public TelaLogin() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 758, 453);
-
+		
+		
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		int xsize = (int) tk.getScreenSize().getWidth();
+		int ysize = (int) tk.getScreenSize().getHeight();
+		this.setSize(xsize, ysize);
+		
 		panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 
 		panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(10, 11, 722, 392);
+		panel_1.setBounds(10, 11, 1790, 700);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -92,14 +97,13 @@ public class TelaLogin extends JFrame {
 				"C:\\Users\\thain\\Documents\\ProjetoPI\\ReciclaBrasil\\ReciclaBrasil\\view\\ReciclaImagem.png"));
 		iconRecicla.setBounds(429, 52, 59, 58);
 		panel_1.add(iconRecicla);
-
 		JLabel lblplanoFundo = new JLabel("");
 		lblplanoFundo.setIcon(new ImageIcon(
 				"green-nature-vector-backgrounds-powerpoint.jpg"));
 		lblplanoFundo.setBounds(0, 0, 722, 392);
 		panel_1.add(lblplanoFundo);*/
 		
-		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		
 		//observador
