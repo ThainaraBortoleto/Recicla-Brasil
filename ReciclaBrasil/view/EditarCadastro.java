@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -250,8 +251,12 @@ public class EditarCadastro extends JFrame {
 	class Observador implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == pagInicial) {
-				new Home();
-				dispose();
+				try {
+					new Home();
+					dispose();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			} else if (e.getSource() == cadastrarColetor) {
 				new CadastrarColetor();
 				dispose();
@@ -265,8 +270,12 @@ public class EditarCadastro extends JFrame {
 				new ConsultarEmpresa1();
 				dispose();
 			} else if (e.getSource() == ajusteValor) {
-				new AjusteValor();
-				dispose();
+				try {
+					new AjusteValor();
+					dispose();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}else if(e.getSource() == histDeTransacoesButton) {
 				new HistoricoDeTransacoes();
 				dispose();

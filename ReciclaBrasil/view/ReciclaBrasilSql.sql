@@ -31,6 +31,7 @@ create table empresa
     endereco varchar(255) not null,
     telefone varchar(14) not null,
     email varchar(100) not null,
+    hora_marcada varchar(5),
     constraint pk_empresa primary key (id),
     constraint uk_empresa unique key (cnpj)
 );
@@ -48,3 +49,23 @@ create table motorista
 		references empresa(id),
 	constraint uk_motorista unique key (cpf)    
 );
+
+create table materiais
+(
+	id integer unsigned not null,
+	nome varchar(100) not null,
+    quantidade integer unsigned not null,
+    limite integer unsigned not null,
+    preco double unsigned not null,
+    constraint pk_materiais primary key (id)
+);
+
+insert into materiais values
+(1, 'Aluminio', 55, 100, 3.50),
+(2, 'Papelao', 70, 100, 3.00),
+(3, 'Plastico', 30, 100, 2.50),
+(4, 'Vidro', 90, 100, 4.50);
+
+insert into empresa values
+(1, 'Teste', 'Razao', 'xxx.xxx.xxx/xx', 'xxxxxxxx', 'Rua Nazare', 'xxxx-xxxx', 'xxxxx@xxx.xxx', '09:00'),
+(2, 'Teste2', 'Razao', '111.111.111/11', 'xxxxxxxx', 'Rua Nazare', 'xxxx-xxxx', 'xxxxx@xxx.xxx', '09:00');

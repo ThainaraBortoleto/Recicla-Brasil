@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -116,9 +117,12 @@ public class TelaLogin extends JFrame {
 	class Observador implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == btnAcessar) {
-				Home pagInicial = new Home();
-				pagInicial.setVisible(true);
-				dispose();
+				try {
+					new Home();
+					dispose();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			} else  {
 				EsqueciSenha esqueciSenha = new EsqueciSenha();
 				esqueciSenha.setVisible(true);

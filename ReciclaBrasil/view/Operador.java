@@ -17,7 +17,7 @@ public class Operador extends Pessoa {
 
 
 	public String toString() {
-		return String.format("#%d\nNome: %s %s\nApelido: %s\nCPF: %s\nData de Nascimento: %s", this.getIdOperador(), this.getNome(), this.getSobrenome(), this.getApelido(), this.getCpf(), this.getDataDeNascimento());
+		return String.format("#%d\nNome: %s %s\nCPF: %s\nData de Nascimento: %s", this.getIdOperador(), this.getNome(), this.getSobrenome(), this.getCpf(), this.getDataDeNascimento());
 	}
 	
 }

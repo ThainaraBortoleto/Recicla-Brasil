@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -296,8 +297,12 @@ public class ConsultarEmpresa1 extends javax.swing.JFrame {
 	class Observador implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == pagInicial) {
-				new Home();
-				dispose();
+				try {
+					new Home();
+					dispose();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			} else if (e.getSource() == cadastrarColetor) {
 				new CadastrarColetor();
 				dispose();
@@ -311,8 +316,12 @@ public class ConsultarEmpresa1 extends javax.swing.JFrame {
 				new ConsultarEmpresa1();
 				dispose();
 			} else if (e.getSource() == ajusteValor) {
-				new AjusteValor();
-				dispose();
+				try {
+					new AjusteValor();
+					dispose();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			} else {
 				new TelaLogin();
 				dispose();
