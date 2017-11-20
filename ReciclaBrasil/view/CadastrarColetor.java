@@ -234,7 +234,6 @@ public class CadastrarColetor extends JFrame {
 
 	class Observador implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
 			try (Connection con = new ConexaoBD().conectar()){
 				if (e.getSource() == pagInicial) {
 					try {
@@ -297,7 +296,7 @@ public class CadastrarColetor extends JFrame {
 				}
 			}catch(SQLException e1) {
 				e1.printStackTrace();
-=======
+			}
 			if (e.getSource() == pagInicial) {
 				try {
 					new Home();
@@ -345,7 +344,6 @@ public class CadastrarColetor extends JFrame {
 			else {
 				new TelaLogin();
 				dispose();
->>>>>>> b80149968e776b7ec2a9c6938330ecbd88fcbb55
 			}
 		}
 	}
