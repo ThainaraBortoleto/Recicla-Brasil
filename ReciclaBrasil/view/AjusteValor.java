@@ -31,13 +31,8 @@ public class AjusteValor extends JFrame {
 			lblDesenvolvedores;
 	private JButton btnEditarAluminio, btnEditarPapelao, btnEditarPlastico, btnEditarVidro;
 	private Observador observador;
-<<<<<<< HEAD
 	MaterialDAO mDao;
 	Material aluminio, papelao, plastico, vidro;
-=======
-	MateriaisDAO mDao;
-	Materiais aluminio, papelao, plastico, vidro;
->>>>>>> b80149968e776b7ec2a9c6938330ecbd88fcbb55
 
 	public AjusteValor() throws SQLException {
 		super("ReciclaBrasil");
@@ -296,13 +291,8 @@ public class AjusteValor extends JFrame {
 					}
 				} else if (e.getSource() == btnEditarPapelao) {
 					try {
-<<<<<<< HEAD
 						mDao = new MaterialDAO(con);
 						papelao = new Material();
-=======
-						mDao = new MateriaisDAO(con);
-						papelao = new Materiais();
->>>>>>> b80149968e776b7ec2a9c6938330ecbd88fcbb55
 						papelao.setIdMateriais(2);
 						int papelaoId = papelao.getIdMateriais();
 						
