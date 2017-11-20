@@ -99,3 +99,4 @@ insert into empresa values
 (2, 'Teste2', 'Razao', '111.111.111/11', 'xxxxxxxx', 'Rua Nazare', 'xxxx-xxxx', 'xxxxx@xxx.xxx', '09:00');
 
 insert into materiais_coletor (id_material, id_coletor, valor_venda) values (2, 2, 0);
+    insert into operador (id_operador, nome, cpf, login, senha) values (1, 'Teste', 'xxxxxxxxxxx', 'admin', 'admin');
