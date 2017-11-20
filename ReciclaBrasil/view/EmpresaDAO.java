@@ -43,12 +43,7 @@ public class EmpresaDAO {
 	}
 
 	public void alterar(Empresa empresa) throws SQLException {
-<<<<<<< HEAD
 		String sqlUpdate = "update empresa set nome_responsavel = ?, razao_social = ?, cnpj = ?, cep = ?, endereco = ?, telefone = ?, email = ? where id_empresa = ?";
-=======
-		String sqlUpdate = "update empresa set nome_responsavel = ?, razao_social = ?, cnpj = ?, cep = ?, endereco = ?, telefone = ?, email = ? where id = ?";
->>>>>>> b80149968e776b7ec2a9c6938330ecbd88fcbb55
-
 		try (PreparedStatement stm = con.prepareStatement(sqlUpdate)) {
 			stm.setString(1, empresa.getNomeResponsavel());
 			stm.setString(2, empresa.getRazaoSocial());
@@ -74,11 +69,7 @@ public class EmpresaDAO {
 
 	public String listarNome(int id) throws SQLException {
 		String nome = null;
-<<<<<<< HEAD
 		String sql = "select nome_responsavel from empresa where id_empresa = ?";
-=======
-		String sql = "select nome_responsavel from empresa where id = ?";
->>>>>>> b80149968e776b7ec2a9c6938330ecbd88fcbb55
 
 		PreparedStatement stm = null;
 		ResultSet rs = null;
@@ -120,11 +111,7 @@ public class EmpresaDAO {
 
 	public int listarHora(int id) throws SQLException {
 		int hora = 0;
-<<<<<<< HEAD
 		String sql = "select hora_marcada from empresa where id_empresa = ?";
-=======
-		String sql = "select hora_marcada from empresa where id = ?";
->>>>>>> b80149968e776b7ec2a9c6938330ecbd88fcbb55
 
 		PreparedStatement stm = null;
 		ResultSet rs = null;
