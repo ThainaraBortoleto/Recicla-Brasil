@@ -312,7 +312,6 @@ public class ColetorRecebimentoMaterial extends JFrame {
 
 	class Observador implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
 			try (Connection con = new ConexaoBD().conectar()) {
 				if (e.getSource() == pagInicial) {
 					try {
@@ -422,54 +421,6 @@ public class ColetorRecebimentoMaterial extends JFrame {
 				}
 			} catch (SQLException e1) {
 				e1.printStackTrace();
-=======
-			if (e.getSource() == pagInicial) {
-				try {
-					new Home();
-					dispose();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			} else if (e.getSource() == cadastrarColetor) {
-				new CadastrarColetor();
-				dispose();
-			} else if (e.getSource() == consultarColetor) {
-				new ColetorRecebimentoMaterial();
-				dispose();
-			} else if (e.getSource() == cadastrarEmpresa) {
-				new CadastrarEmpresa();
-				dispose();
-			} else if (e.getSource() == consultarEmpresa) {
-				new ConsultarEmpresa1();
-				dispose();
-			} else if (e.getSource() == ajusteValor) {
-				try {
-					new AjusteValor();
-					dispose();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			} else if(e.getSource() == depositarButton) {
-				System.out.println("Depositado com sucesso");
-			}else if(e.getSource() == cancelarButton) {
-				pesoTextField.setText("");
-				pesoTextField2.setText("");
-				pesoTextField3.setText("");
-				pesoTextField4.setText("");
-				
-			}else if(e.getSource() == histDeTransacoesButton) {
-				new HistoricoDeTransacoes();
-				dispose();
-			}else if(e.getSource() == folhaPagButton) {
-				new FolhaDePagamento();
-				dispose();
-			}else if(e.getSource() == editCadastroButton) {
-				new EditarCadastro();
-				dispose();
-			}else {
-				new TelaLogin();
-				dispose();
->>>>>>> b80149968e776b7ec2a9c6938330ecbd88fcbb55
 			}
 		}
 	}
