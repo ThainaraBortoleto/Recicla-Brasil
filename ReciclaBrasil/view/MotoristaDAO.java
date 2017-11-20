@@ -1,3 +1,5 @@
+package view;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +16,7 @@ public class MotoristaDAO {
 	}
 
 	public void inserir(Motorista motorista) throws SQLException {
-		String slqInsert = "insert into motorista (id, id_empresa, nome, cpf, peso_max, placa) values (?, ?, ?, ?, ?, ?)";
+		String slqInsert = "insert into motorista (id_motorista, id_empresa, nome, cpf, peso_max, placa) values (?, ?, ?, ?, ?, ?)";
 
 		try (PreparedStatement stm = con.prepareStatement(slqInsert)) {
 			stm.setInt(1, motorista.getId());
@@ -29,7 +31,7 @@ public class MotoristaDAO {
 	}
 
 	public void alterar(Motorista motorista) throws SQLException {
-		String sqlUpdate = "update motorista set id_empresa = ?, nome = ?, cpf = ?, peso_max = ?, placa = ? when id = ?";
+		String sqlUpdate = "update motorista set id_empresa = ?, nome = ?, cpf = ?, peso_max = ?, placa = ? when id_motorista = ?";
 
 		try (PreparedStatement stm = con.prepareStatement(sqlUpdate)) {
 			stm.setInt(1, motorista.getIdEmpresa());
@@ -43,7 +45,7 @@ public class MotoristaDAO {
 	}
 
 	public void excluir(Motorista motorista) throws SQLException {
-		String sqlDelete = "delete from motorista where id = ?";
+		String sqlDelete = "delete from motorista where id_motorista = ?";
 
 		try (PreparedStatement stm = con.prepareStatement(sqlDelete)) {
 			stm.setInt(1, motorista.getId());
@@ -81,7 +83,7 @@ public class MotoristaDAO {
 		List<Motorista> motoristas = new ArrayList<>();
 		Motorista ultimo = null;
 		
-		String sqlSelect = "select m.id as ID_motorista, m.nome as Motorista, m.cpf as CPF, m.peso_max as Peso_Suportado, m.placa as Placa, m.id_empresa as ID_Empresa, e.nome_responsavel as Responsavel, e.cnpj as CNPJ from motorista m join empresa e on m.id_empresa = e.id";
+		String sqlSelect = "select m.id_motorista as ID_motorista, m.nome as Motorista, m.cpf as CPF, m.peso_max as Peso_Suportado, m.placa as Placa, m.id_empresa as ID_Empresa, e.nome_responsavel as Responsavel, e.cnpj as CNPJ from motorista m join empresa e on m.id_empresa = e.id_empresa";
 		try(PreparedStatement stm = con.prepareStatement(sqlSelect)){
 			stm.execute();
 			try(ResultSet rs = stm.getResultSet()){

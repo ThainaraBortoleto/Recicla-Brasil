@@ -1,16 +1,19 @@
+package view;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.SQLException;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -115,14 +118,30 @@ public class TelaLogin extends JFrame {
 	
 	class Observador implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() == btnAcessar) {
-				Home pagInicial = new Home();
-				pagInicial.setVisible(true);
-				dispose();
-			} else  {
-				EsqueciSenha esqueciSenha = new EsqueciSenha();
-				esqueciSenha.setVisible(true);
-				dispose();
+			try(Connection con = new ConexaoBD().conectar()){
+				if(e.getSource() == btnAcessar) {
+					try {
+						String login = campoUsuario.getText(); 
+						String senha = new String (textField_1.getPassword());
+						
+						OperadorDAO oDAO = new OperadorDAO(con);
+						if(oDAO.validaLogin(login, senha)) {
+							new Home();
+							dispose();
+						} else {
+							JOptionPane.showMessageDialog(null, "Usuário / Senha incorretos");
+						}
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else  {
+					EsqueciSenha esqueciSenha = new EsqueciSenha();
+					esqueciSenha.setVisible(true);
+					dispose();
+				}
+				
+			} catch (SQLException e1) {
+				e1.printStackTrace();
 			}
 		}
 	}

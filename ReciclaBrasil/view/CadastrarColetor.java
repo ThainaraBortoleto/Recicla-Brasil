@@ -1,8 +1,16 @@
+package view;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,17 +19,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.AbstractAction;
-import java.awt.SystemColor;
-import java.awt.Toolkit;
-
-import javax.swing.JTextField;
-import javax.swing.ImageIcon;
 
 public class CadastrarColetor extends JFrame {
 
@@ -231,41 +234,68 @@ public class CadastrarColetor extends JFrame {
 
 	class Observador implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == pagInicial) {
-				new Home();
-				dispose();
-			} else if (e.getSource() == cadastrarColetor) {
-				new CadastrarColetor();
-				dispose();
-			} else if (e.getSource() == ConsultarColetor) {
-				new ColetorRecebimentoMaterial();
-				dispose();
-			} else if (e.getSource() == cadastrarEmpresa) {
-				new CadastrarEmpresa();
-				dispose();
-			} else if (e.getSource() == consultarEmpresa) {
-				new ConsultarEmpresa1();
-				dispose();
-			} else if (e.getSource() == ajusteValor) {
-				new AjusteValor();
-				dispose();
-			} else if(e.getSource() == btnCancelar){
-				new Home();
-				dispose();
-			} else if(e.getSource() == btnCadastrarDigital) {
-				JOptionPane.showMessageDialog(null, "Pressione a digital no leitor Biométrico");
-				JOptionPane.showMessageDialog(null, "Digital cadastrada com sucesso");
-			} else if(e.getSource() == btnGerarQrcode) {
-				JOptionPane.showMessageDialog(null, "QRCode gerado com sucesso!");
-			} else if(e.getSource() == btnPronto) {
-				ColetorRecebimentoMaterial tela = new ColetorRecebimentoMaterial();
-				tela.setVisible(true);
-				dispose();
-			}
-			
-			else {
-				new TelaLogin();
-				dispose();
+			try (Connection con = new ConexaoBD().conectar()){
+				if (e.getSource() == pagInicial) {
+					try {
+						new Home();
+						dispose();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else if (e.getSource() == cadastrarColetor) {
+					new CadastrarColetor();
+					dispose();
+				} else if (e.getSource() == ConsultarColetor) {
+					try {
+						new ColetorRecebimentoMaterial();
+						dispose();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else if (e.getSource() == cadastrarEmpresa) {
+					new CadastrarEmpresa();
+					dispose();
+				} else if (e.getSource() == consultarEmpresa) {
+					new ConsultarEmpresa1();
+					dispose();
+				} else if (e.getSource() == ajusteValor) {
+					try {
+						new AjusteValor();
+						dispose();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else if(e.getSource() == btnCancelar){
+					try {
+						new Home();
+						dispose();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else if(e.getSource() == btnCadastrarDigital) {
+					JOptionPane.showMessageDialog(null, "Pressione a digital no leitor Biométrico");
+					JOptionPane.showMessageDialog(null, "Digital cadastrada com sucesso");
+				} else if(e.getSource() == btnGerarQrcode) {
+					JOptionPane.showMessageDialog(null, "QRCode gerado com sucesso!");
+				} else if(e.getSource() == btnPronto) {
+					ColetorDAO cDAO = new ColetorDAO(con);
+					String nome = textField.getText();
+					String apelido = textField_1.getText();
+					
+					Coletor c1 = new Coletor (2);
+					c1.setNome(nome);
+					c1.setApelido(apelido);
+					
+					cDAO.inserir(c1);
+					JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+				}
+				
+				else {
+					new TelaLogin();
+					dispose();
+				}
+			}catch(SQLException e1) {
+				e1.printStackTrace();
 			}
 		}
 	}

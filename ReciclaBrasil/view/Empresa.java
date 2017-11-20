@@ -1,15 +1,21 @@
+package view;
+
 public class Empresa {
 	private int idEmpresa;
-	private String nomeResponsavel, razaoSocial, cnpj, cep, endereco, telefone, email;
+	private String nomeResponsavel, razaoSocial, cnpj, cep, endereco, telefone, email, horarioMarcado;
 
+	public Empresa() {
+		
+	}
+	
 	public Empresa(int idEmpresa, String nomeResponsavel, String cnpj) {
 		this.idEmpresa = idEmpresa;
 		this.nomeResponsavel = nomeResponsavel;
 		this.cnpj = cnpj;
 	}
-
+	
 	public Empresa(int idEmpresa, String nomeResponsavel, String razaoSocial, String cnpj, String cep, String endereco,
-			String telefone, String email) {
+			String telefone, String email, String horarioMarcado) {
 		super();
 		this.idEmpresa = idEmpresa;
 		this.nomeResponsavel = nomeResponsavel;
@@ -19,6 +25,15 @@ public class Empresa {
 		this.endereco = endereco;
 		this.telefone = telefone;
 		this.email = email;
+		this.horarioMarcado = horarioMarcado;
+	}
+
+	public String getHorarioMarcado() {
+		return horarioMarcado;
+	}
+
+	public void setHorarioMarcado(String horarioMarcado) {
+		this.horarioMarcado = horarioMarcado;
 	}
 
 	public int getIdEmpresa() {
