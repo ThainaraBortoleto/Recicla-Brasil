@@ -31,8 +31,13 @@ public class AjusteValor extends JFrame {
 			lblDesenvolvedores;
 	private JButton btnEditarAluminio, btnEditarPapelao, btnEditarPlastico, btnEditarVidro;
 	private Observador observador;
+<<<<<<< HEAD
 	MaterialDAO mDao;
 	Material aluminio, papelao, plastico, vidro;
+=======
+	MateriaisDAO mDao;
+	Materiais aluminio, papelao, plastico, vidro;
+>>>>>>> b80149968e776b7ec2a9c6938330ecbd88fcbb55
 
 	public AjusteValor() throws SQLException {
 		super("ReciclaBrasil");
@@ -145,6 +150,7 @@ public class AjusteValor extends JFrame {
 			lblMaterial.setBounds(6, 44, 61, 16);
 			panelAjuste.add(lblMaterial);
 
+<<<<<<< HEAD
 			mDao = new MaterialDAO(con);
 			aluminio = new Material();
 			aluminio.setIdMateriais(1);
@@ -153,6 +159,16 @@ public class AjusteValor extends JFrame {
 			plastico = new Material();
 			plastico.setIdMateriais(3);
 			vidro = new Material();
+=======
+			mDao = new MateriaisDAO(con);
+			aluminio = new Materiais();
+			aluminio.setIdMateriais(1);
+			papelao = new Materiais();
+			papelao.setIdMateriais(2);
+			plastico = new Materiais();
+			plastico.setIdMateriais(3);
+			vidro = new Materiais();
+>>>>>>> b80149968e776b7ec2a9c6938330ecbd88fcbb55
 			vidro.setIdMateriais(4);
 
 			int aluminioId = aluminio.getIdMateriais();
@@ -260,8 +276,13 @@ public class AjusteValor extends JFrame {
 					}
 				} else if (e.getSource() == btnEditarAluminio) {
 					try {
+<<<<<<< HEAD
 						mDao = new MaterialDAO(con);
 						aluminio = new Material();
+=======
+						mDao = new MateriaisDAO(con);
+						aluminio = new Materiais();
+>>>>>>> b80149968e776b7ec2a9c6938330ecbd88fcbb55
 						aluminio.setIdMateriais(1);
 						int aluminioId = aluminio.getIdMateriais();
 						
@@ -277,8 +298,13 @@ public class AjusteValor extends JFrame {
 					}
 				} else if (e.getSource() == btnEditarPapelao) {
 					try {
+<<<<<<< HEAD
 						mDao = new MaterialDAO(con);
 						papelao = new Material();
+=======
+						mDao = new MateriaisDAO(con);
+						papelao = new Materiais();
+>>>>>>> b80149968e776b7ec2a9c6938330ecbd88fcbb55
 						papelao.setIdMateriais(2);
 						int papelaoId = papelao.getIdMateriais();
 						
@@ -294,8 +320,13 @@ public class AjusteValor extends JFrame {
 					}
 				} else if (e.getSource() == btnEditarPlastico) {
 					try {
+<<<<<<< HEAD
 						mDao = new MaterialDAO(con);
 						plastico = new Material();
+=======
+						mDao = new MateriaisDAO(con);
+						plastico = new Materiais();
+>>>>>>> b80149968e776b7ec2a9c6938330ecbd88fcbb55
 						plastico.setIdMateriais(3);
 						int plasticoId = plastico.getIdMateriais();
 						
@@ -311,8 +342,13 @@ public class AjusteValor extends JFrame {
 					}
 				} else if (e.getSource() == btnEditarVidro) {
 					try {
+<<<<<<< HEAD
 						mDao = new MaterialDAO(con);
 						vidro = new Material();
+=======
+						mDao = new MateriaisDAO(con);
+						vidro = new Materiais();
+>>>>>>> b80149968e776b7ec2a9c6938330ecbd88fcbb55
 						vidro.setIdMateriais(4);
 						int vidroId = vidro.getIdMateriais();
 						

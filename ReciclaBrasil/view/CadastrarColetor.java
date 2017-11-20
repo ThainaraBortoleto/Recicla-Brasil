@@ -234,6 +234,7 @@ public class CadastrarColetor extends JFrame {
 
 	class Observador implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 			try (Connection con = new ConexaoBD().conectar()){
 				if (e.getSource() == pagInicial) {
 					try {
@@ -296,6 +297,55 @@ public class CadastrarColetor extends JFrame {
 				}
 			}catch(SQLException e1) {
 				e1.printStackTrace();
+=======
+			if (e.getSource() == pagInicial) {
+				try {
+					new Home();
+					dispose();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			} else if (e.getSource() == cadastrarColetor) {
+				new CadastrarColetor();
+				dispose();
+			} else if (e.getSource() == ConsultarColetor) {
+				new ColetorRecebimentoMaterial();
+				dispose();
+			} else if (e.getSource() == cadastrarEmpresa) {
+				new CadastrarEmpresa();
+				dispose();
+			} else if (e.getSource() == consultarEmpresa) {
+				new ConsultarEmpresa1();
+				dispose();
+			} else if (e.getSource() == ajusteValor) {
+				try {
+					new AjusteValor();
+					dispose();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			} else if(e.getSource() == btnCancelar){
+				try {
+					new Home();
+					dispose();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			} else if(e.getSource() == btnCadastrarDigital) {
+				JOptionPane.showMessageDialog(null, "Pressione a digital no leitor Biométrico");
+				JOptionPane.showMessageDialog(null, "Digital cadastrada com sucesso");
+			} else if(e.getSource() == btnGerarQrcode) {
+				JOptionPane.showMessageDialog(null, "QRCode gerado com sucesso!");
+			} else if(e.getSource() == btnPronto) {
+				ColetorRecebimentoMaterial tela = new ColetorRecebimentoMaterial();
+				tela.setVisible(true);
+				dispose();
+			}
+			
+			else {
+				new TelaLogin();
+				dispose();
+>>>>>>> b80149968e776b7ec2a9c6938330ecbd88fcbb55
 			}
 		}
 	}
