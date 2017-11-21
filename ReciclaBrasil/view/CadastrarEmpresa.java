@@ -619,7 +619,18 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
 
 	class Observador implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == JBsalvar) {
+			try(Connection con = new ConexaoBD().conectar()){
+				if (e.getSource() == JBsalvar) {
+				//Exemplo para o gui
+				EmpresaDAO eDao = new EmpresaDAO(con);
+				Empresa e1 = new Empresa();
+				
+				//Pega todos os dados aqui e insere no objeto e1
+				e1.setIdEmpresa(Integer.parseInt(JTextField1.getText()));
+					
+				//Inseri no banco Empresa
+				eDao.inserir(e1);
+					
 				jTextField1.setText(" ");
 				jTextField2.setText("");
 				jTextField3.setText("");
@@ -639,40 +650,45 @@ public class CadastrarEmpresa extends javax.swing.JFrame {
 				jTextField17.setText("");
 				jTextField18.setText("");
 				jTextField19.setText("");
-			} else if (e.getSource() == pagInicial) {
-				try {
-					new Home();
+					
+				} else if (e.getSource() == pagInicial) {
+					try {
+						new Home();
+						dispose();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else if (e.getSource() == cadastrarColetor) {
+					new CadastrarColetor();
 					dispose();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			} else if (e.getSource() == cadastrarColetor) {
-				new CadastrarColetor();
-				dispose();
-			} else if (e.getSource() == consultarColetor) {
-				try {
-					new ColetorRecebimentoMaterial();
+				} else if (e.getSource() == consultarColetor) {
+					try {
+						new ColetorRecebimentoMaterial();
+						dispose();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else if (e.getSource() == cadastrarEmpresa) {
+					new CadastrarEmpresa();
 					dispose();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			} else if (e.getSource() == cadastrarEmpresa) {
-				new CadastrarEmpresa();
-				dispose();
-			} else if (e.getSource() == consultarEmpresa) {
-				new ConsultarEmpresa1();
-				dispose();
-			} else if (e.getSource() == ajusteValor) {
-				try {
-					new AjusteValor();
+				} else if (e.getSource() == consultarEmpresa) {
+					new ConsultarEmpresa1();
 					dispose();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
+				} else if (e.getSource() == ajusteValor) {
+					try {
+						new AjusteValor();
+						dispose();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else {
+					new TelaLogin();
+					dispose();
 				}
-			} else {
-				new TelaLogin();
-				dispose();
+			} catch (SQLException e1){
+				e1.printStackTrace();	
 			}
+			
 		}
 	}
 }
