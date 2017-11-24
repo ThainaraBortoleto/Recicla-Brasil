@@ -1,15 +1,17 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.SQLException;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -28,30 +30,22 @@ public class TelaLogin extends JFrame {
 	private JLabel lblSenha;
 	private JCheckBox chckbxLembrarMe;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaLogin frame = new TelaLogin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	public TelaLogin() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 758, 453);
-
+		
+		
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		int xsize = (int) tk.getScreenSize().getWidth();
+		int ysize = (int) tk.getScreenSize().getHeight();
+		this.setSize(xsize, ysize);
+		
 		panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 
 		panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(10, 11, 722, 392);
+		panel_1.setBounds(10, 11, 1790, 700);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -104,14 +98,13 @@ public class TelaLogin extends JFrame {
 				"C:\\Users\\thain\\Documents\\ProjetoPI\\ReciclaBrasil\\ReciclaBrasil\\view\\ReciclaImagem.png"));
 		iconRecicla.setBounds(429, 52, 59, 58);
 		panel_1.add(iconRecicla);
-
 		JLabel lblplanoFundo = new JLabel("");
 		lblplanoFundo.setIcon(new ImageIcon(
 				"green-nature-vector-backgrounds-powerpoint.jpg"));
 		lblplanoFundo.setBounds(0, 0, 722, 392);
 		panel_1.add(lblplanoFundo);*/
 		
-		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		
 		//observador
@@ -123,14 +116,30 @@ public class TelaLogin extends JFrame {
 	
 	class Observador implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() == btnAcessar) {
-				Home pagInicial = new Home();
-				pagInicial.setVisible(true);
-				dispose();
-			} else  {
-				EsqueciSenha esqueciSenha = new EsqueciSenha();
-				esqueciSenha.setVisible(true);
-				dispose();
+			try(Connection con = new ConexaoBD().conectar()){
+				if(e.getSource() == btnAcessar) {
+					try {
+						String login = campoUsuario.getText(); 
+						String senha = new String (textField_1.getPassword());
+						
+						OperadorDAO oDAO = new OperadorDAO(con);
+						if(oDAO.validaLogin(login, senha)) {
+							new Home();
+							dispose();
+						} else {
+							JOptionPane.showMessageDialog(null, "Usuário / Senha incorretos");
+						}
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else  {
+					EsqueciSenha esqueciSenha = new EsqueciSenha();
+					esqueciSenha.setVisible(true);
+					dispose();
+				}
+				
+			} catch (SQLException e1) {
+				e1.printStackTrace();
 			}
 		}
 	}

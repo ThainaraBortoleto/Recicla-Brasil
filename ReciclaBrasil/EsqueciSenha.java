@@ -1,17 +1,16 @@
-import java.awt.EventQueue;
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class EsqueciSenha extends JFrame {
 
@@ -22,19 +21,7 @@ public class EsqueciSenha extends JFrame {
 	private JButton btnEnviar;
 	private JButton btnCancelar;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EsqueciSenha frame = new EsqueciSenha();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	public EsqueciSenha() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 810, 514);
@@ -75,13 +62,6 @@ public class EsqueciSenha extends JFrame {
 		panel.add(lblUmEmailSer);
 
 		btnEnviar = new JButton("Enviar");
-		btnEnviar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new EmailEnviado();
-				setVisible(true);
-				dispose();
-			}
-		});
 		btnEnviar.setBackground(Color.GREEN);
 		btnEnviar.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		btnEnviar.setBounds(655, 406, 89, 23);

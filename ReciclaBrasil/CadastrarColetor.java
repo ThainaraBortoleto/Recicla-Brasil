@@ -1,8 +1,16 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,17 +19,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.AbstractAction;
-import java.awt.SystemColor;
-import java.awt.Toolkit;
-
-import javax.swing.JTextField;
-import javax.swing.ImageIcon;
 
 public class CadastrarColetor extends JFrame {
 
@@ -42,7 +45,7 @@ public class CadastrarColetor extends JFrame {
 	private JTextField textField_1;
 	private JTextField txtDdmmaaaa;
 	private JLabel label;
-	private JButton btnCancelar;
+	private JButton btnCancelar, btnCadastrarDigital, btnGerarQrcode, btnPronto;
 
 	public CadastrarColetor() {
 		super("ReciclaBrasil");
@@ -167,35 +170,17 @@ public class CadastrarColetor extends JFrame {
 		txtDdmmaaaa.setBounds(296, 229, 163, 28);
 		panel.add(txtDdmmaaaa);
 
-		JButton btnCadastrarDigital = new JButton("Cadastrar Digital");
-		btnCadastrarDigital.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Pressione a digital no leitor Biométrico");
-				JOptionPane.showMessageDialog(null, "Digital cadastrada com sucesso");
-			}
-		});
+		btnCadastrarDigital = new JButton("Cadastrar Digital");
 		btnCadastrarDigital.setBackground(new Color(135, 206, 235));
 		btnCadastrarDigital.setBounds(296, 309, 136, 29);
 		panel.add(btnCadastrarDigital);
 
-		JButton btnGerarQrcode = new JButton("Gerar QRCode");
-		btnGerarQrcode.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, "QRCode gerado com sucesso!");
-			}
-		});
+		btnGerarQrcode = new JButton("Gerar QRCode");
 		btnGerarQrcode.setBackground(new Color(135, 206, 235));
 		btnGerarQrcode.setBounds(462, 309, 117, 29);
 		panel.add(btnGerarQrcode);
 
-		JButton btnPronto = new JButton("Pronto!");
-		btnPronto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ColetorRecebimentoMaterial tela = new ColetorRecebimentoMaterial();
-				tela.setVisible(true);
-				dispose();
-			}
-		});
+		btnPronto = new JButton("Pronto!");
 		btnPronto.setBackground(Color.GREEN);
 		btnPronto.setBounds(751, 535, 117, 29);
 		panel.add(btnPronto);
@@ -238,50 +223,82 @@ public class CadastrarColetor extends JFrame {
 		consultarEmpresa.addActionListener(observador);
 		ajusteValor.addActionListener(observador);
 		btnCancelar.addActionListener(observador);
+		btnPronto.addActionListener(observador);
+		btnCadastrarDigital.addActionListener(observador);
+		btnGerarQrcode.addActionListener(observador);
 		sair.addActionListener(observador);
-		
 
 	}
 
 	class Observador implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == pagInicial) {
-				new Home();
-				dispose();
-			} else if (e.getSource() == cadastrarColetor) {
-				new CadastrarColetor();
-				dispose();
-			} else if (e.getSource() == ConsultarColetor) {
-				new ColetorRecebimentoMaterial();
-				dispose();
-			} else if (e.getSource() == cadastrarEmpresa) {
-				new CadastrarEmpresa();
-				dispose();
-			} else if (e.getSource() == consultarEmpresa) {
-				new ConsultarEmpresa1();
-				dispose();
-			} else if (e.getSource() == ajusteValor) {
-				new AjusteValor();
-				dispose();
-			} else if(e.getSource() == btnCancelar){
-				new Home();
-				dispose();
-			}else {
-				new TelaLogin();
-				dispose();
+			try (Connection con = new ConexaoBD().conectar()) {
+				if (e.getSource() == pagInicial) {
+					try {
+						new Home();
+						dispose();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else if (e.getSource() == cadastrarColetor) {
+					new CadastrarColetor();
+					dispose();
+				} else if (e.getSource() == ConsultarColetor) {
+					try {
+						new ColetorRecebimentoMaterial();
+						dispose();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else if (e.getSource() == cadastrarEmpresa) {
+					new CadastrarEmpresa();
+					dispose();
+				} else if (e.getSource() == consultarEmpresa) {
+					try {
+						new CompraMaterial();
+						dispose();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else if (e.getSource() == ajusteValor) {
+					try {
+						new AjusteValor();
+						dispose();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else if (e.getSource() == btnCancelar) {
+					try {
+						new Home();
+						dispose();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else if (e.getSource() == btnCadastrarDigital) {
+					JOptionPane.showMessageDialog(null, "Pressione a digital no leitor Biométrico");
+					JOptionPane.showMessageDialog(null, "Digital cadastrada com sucesso");
+				} else if (e.getSource() == btnGerarQrcode) {
+					JOptionPane.showMessageDialog(null, "QRCode gerado com sucesso!");
+				} else if (e.getSource() == btnPronto) {
+					ColetorDAO cDAO = new ColetorDAO(con);
+					String nome = textField.getText();
+					String apelido = textField_1.getText();
+					Coletor coletor = new Coletor();
+					coletor.setNome(nome);
+					coletor.setApelido(apelido);
+
+					cDAO.inserir(coletor);
+
+					JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+				}
+
+				else {
+					new TelaLogin();
+					dispose();
+				}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
 			}
-		}
-	}
-
-	private class SwingAction extends AbstractAction {
-		private static final long serialVersionUID = 1L;
-
-		public SwingAction() {
-			putValue(NAME, "SwingAction");
-			putValue(SHORT_DESCRIPTION, "Some short description");
-		}
-
-		public void actionPerformed(ActionEvent e) {
 		}
 	}
 }
