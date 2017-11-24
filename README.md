@@ -1,2 +1,2 @@
 # Recicla-Brasil
-Projeto
+Projeto Integrado
